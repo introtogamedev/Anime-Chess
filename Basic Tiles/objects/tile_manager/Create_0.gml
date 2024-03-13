@@ -1,7 +1,9 @@
 #macro STARTING_X_COORDINATE 150
 #macro STARTING_Y_POSITION 100
-#macro HORIZONTAL_LENGTH 8
-#macro VERTICAL_LENGTH 6
+#macro HORIZONTAL_GRID_LENGTH 8
+#macro VERTICAL_GRID_HEIGHT 8
+#macro STARTING_X_OFFSET 45
+#macro TILE_WIDTH 90
 
 space_tile_ccordinates = [0, 0];
 space_tile = instance_create_layer(0, 0, "Instances_1", hehe);
@@ -9,39 +11,43 @@ space_tile = instance_create_layer(0, 0, "Instances_1", hehe);
 grid = [];
 
 function create_grid(){
-	var vertical_position = STARTING_Y_POSITION;
-	var initial_coordinate_v = 0;
-	var initial_coordinate_n = 0;
-	
-	for (var h = 0; h < VERTICAL_LENGTH; h++){
+	var y_position = STARTING_Y_POSITION;
+	var initial_coordinate_y = 0;
+	var initial_coordinate_x = 0;
+	var x_cor_offset = floor( (VERTICAL_GRID_HEIGHT -1) /2);
+	show_debug_message(x_cor_offset)
+	for (var h = 0 ; h < VERTICAL_GRID_HEIGHT ; h++){
+		
+		var x_coordinate = 0
+		var y_coordinate = 0
 		
 		if (h % 2 == 1 /*odd row*/){
-			var buffer_2 = -1 * ((h - 1)/2);
+			x_coordinate = -1 * ((h - 1)/2);
+			y_coordinate = (h + 1)/2;
 		} else /*even row*/{
-			var buffer_2 = -1 * (h/2);
+			x_coordinate = -1 * (h/2);
+			y_coordinate = h/2;
 		}
 		
-		if ((h + 1) % 2 == 1){
-			var buffer_1 = h/2;
-		} else {
-			var buffer_1 = (h + 1)/2;
-		}
-		
-		for (var i = 0; i < HORIZONTAL_LENGTH; i++){
+
+		for (var i = 0; i < HORIZONTAL_GRID_LENGTH ; i++){
 			//odd or even row
+			var x_position = 0;//initialize to 0;
 			if (h % 2 == 0){
-				var begin_x = STARTING_X_COORDINATE;
+				x_position = STARTING_X_COORDINATE + i * TILE_WIDTH;
 			} else {
-				var begin_x = STARTING_X_COORDINATE + 45;
+				x_position = STARTING_X_COORDINATE + STARTING_X_OFFSET + i * TILE_WIDTH;
 			}
-			var obj = instance_create_layer(begin_x + i * 90, vertical_position, "Instances", tile);
-			obj.x_assignment = buffer_1 + i;
-			obj.y_assignment = buffer_2 + i + 2;
-			//creates array with object coordinates and object itself
-			var arr = [obj, obj.x_assignment, obj.y_assignment];
-			array_push(grid, arr);
+			
+			var obj = instance_create_layer(x_position, y_position, "Instances", tile);
+			grid[x_coordinate + x_cor_offset][ y_coordinate] = obj;
+
+			obj.x_assignment = x_coordinate +x_cor_offset + i;
+			obj.y_assignment = y_coordinate + i;
+
+
 		}
-		vertical_position += 70;
+		y_position += 70;
 	}
 }
 
