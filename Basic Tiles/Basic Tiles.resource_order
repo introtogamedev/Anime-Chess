@@ -1,0 +1,14 @@
+{
+  "FolderOrderSettings": [
+    {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
+  ],
+  "ResourceOrderSettings": [
+    {"name":"sprtie_hehe","order":13,"path":"sprites/sprtie_hehe/sprtie_hehe.yy",},
+    {"name":"tile_manager","order":1,"path":"objects/tile_manager/tile_manager.yy",},
+    {"name":"blockk","order":3,"path":"objects/blockk/blockk.yy",},
+    {"name":"Sprite2","order":12,"path":"sprites/Sprite2/Sprite2.yy",},
+    {"name":"Sprite1","order":11,"path":"sprites/Sprite1/Sprite1.yy",},
+    {"name":"tile","order":2,"path":"objects/tile/tile.yy",},
+    {"name":"hehe","order":14,"path":"objects/hehe/hehe.yy",},
+  ],
+}
